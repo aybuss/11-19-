@@ -1,0 +1,10 @@
+https://stackoverflow.com/questions/1593946/what-is-af-inet-and-why-do-i-need-it
+AF_INET is an address family that is used to designate the type of addresses
+When you create a socket, you have to specify its address family, and then you can only use addresses of that type with the socket.
+There is 39 other address families such as UNİX, IPX, IRDA, BLUETOOTH but it is doubtful way for such a low level
+And AF_INET is the safest option over a network but there is AF_INET6 for internet Protocol v6
+(daha sonra devam edecek:
+https://inet.omnetpp.org/docs/developers-guide/ch-sockets.html
+https://www.ibm.com/docs/en/i/7.2?topic=family-af-inet-address
+https://www.ibm.com/docs/en/i/7.3?topic=families-using-af-inet-address-family
+bu linklere bakılcak)
