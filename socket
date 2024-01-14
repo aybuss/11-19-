@@ -1,1 +1,87 @@
+HTTP  Hyper - Text Transfer Protocol (veri aktarımı protokulu)
+SMTP Simple Mail Ttransfer Protocol
+TCP Transmission Control Protocol ( geçis kontrol protokolu)
+TCP is reliable because network are detected and retransmitted by sender and usıng socket.SOCK_STREAM by the way but User Datagram Protocol (UDP) sockets created with socket.SOCK_DGRAM and data can be out of order Also TCP protects you from packet loss or out of order data arrival
+
+    
+    rpi üzerinde:
+    ana bilgisayara bağlanmak üzere bir client socket oluşturulur
+    opencvnin videocapture nesnesi kullanılarak indexi 0 olan kameraya bağlanılır
+    kmaeradaki görüntü Mat türündeki frame değişkenine atanır
+    frame hevc haline getirilerek sıkıştırılır
+    ana bilgisayara gönderilecek hevc dosyasının boyutu haber verilir
+    ana bilgisayara sıkıştırılmış hevc dosyası iletilir
+    esc tuşuna basılmadığı müddet
+    
+HOST => You write your own IP address and you are the one who will take the response
+PORT => There is many gates codes can go forward from one of them for block this problem you give it a number of port so response doesnt get lost
+
+SOMETHING = 64532345643245PORT => Bu sorunu engellemek için kodların birinden ileri gidebileceği birçok kapı var, ona bir port numarası veriyorsunuz böylelikle cevabınız kaybolmazresponse
+AF_INET = 87463475867586
+bu bir tanım bunu her seferinde yazmak yerine bunu AF_INET olarak tanımlayıp daha sonra yazmamız gerekince direkt AF_INET olarak yazıyoruz 
+
+   clientSocket = socket(AF_INET, SOCK_STREAM, 0);  #c++
+   server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #python
+   
+   
+Bind is connection between socket and address. When you bind the socket and address.  The socket is being able to know the address
+
+It listens for connections from clients. When a client connects, the server calls .accept() to accept, or complete, the connection.
+
+We are reading the code w Mat Frame and also you are using Mat Frame in C++ because you dont have numpy as you have in python
+    
+            cap >> frame;
+        but u use it in opencv-python in that way;
+            cap = VideoCapture(<source>)
+            ret, frame = cap.read()
+            
+At the rest of the code, you are taking a dimension of the capture and you are giving it to the pc from rpi but you have to compress the file to ".hecv"
+
+      vector<int> compression_params;
+        compression_params.push_back(IMWRITE_HEVC_QUALITY);
+        compression_params.push_back(90);
+
+        vector<uchar> encodedImage;
+        imencode(".hevc", frame, encodedImage, compression_params);
+
+              // Sending İmage size right here from the socket we just made. IDK it is going to work
+        int imgSize = encodedImage.size();
+        if (send(clientSocket, &imgSize, sizeof(int), 0) < 0) {
+            cerr << " Error:  Couldn't send frame size." << endl;
+            break;
+        }
+
+        // Sending the frame
+        if (send(clientSocket, encodedImage.data(), imgSize, 0) < 0) {
+            cerr << " Error: Frame couldn't be sent." << endl;
+            break;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
